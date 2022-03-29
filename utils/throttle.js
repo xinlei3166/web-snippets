@@ -50,8 +50,3 @@ function throttle(method, delay) {
     }
 }
 
-function scrollFn() {
-    console.log(1)
-}
-
-window.onscroll = throttle(scrollFn, 500)

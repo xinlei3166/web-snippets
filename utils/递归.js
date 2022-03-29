@@ -21,3 +21,57 @@ for (let obj of l) {
         console.log(JSON.stringify(res))
     }
 }
+
+const routes = [
+    {
+        title: '首页',
+        icon: '',
+        path: '/index',
+        element: 1,
+        children: [
+            {
+                title: '首页',
+                icon: '',
+                path: '/index',
+                element: 11,
+                children: [
+                    {
+                        title: '首页',
+                        icon: '',
+                        path: '/index',
+                        element: 111,
+                        children: []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        title: '首页',
+        icon: '',
+        path: '/index',
+        element: 2,
+        children: [
+            {
+                title: '首页',
+                icon: '',
+                path: '/index',
+                element: 22
+            }
+        ]
+    }
+]
+
+function recursive(routes) {
+    let routerRoutes = []
+    for (const route of routes) {
+        const obj = { path: route.path, element: route.element, children: [] }
+        if (route.children && route.children.length > 0) {
+            obj.children = recursive(route.children)
+        }
+        routerRoutes.push(obj)
+    }
+    return routerRoutes
+}
+
+console.log(JSON.stringify(recursive(routes)))

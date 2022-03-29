@@ -26,14 +26,25 @@
     <div id="wrap">
         <div class="content"><button id="btn">Throttle</button></div>
     </div>
-    <script src="debounce.js"></script>
+    <script src="../utils/debounce.js"></script>
+    <script src="../utils/throttle.js"></script>
+<!--    <script src="https://cdn.bootcdn.net/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>-->
     <script>
+      function scrollFn() {
+        console.log(1)
+      }
+
+      // window.onscroll = _.throttle(scrollFn, 500)
+      window.onscroll = throttle(scrollFn, 500)
+
+      window.onload = function () {
         var btn = document.querySelector('#btn')
         btn.onclick = debounce(show, 500)
 
         function show() {
-            console.log(new Date())
+          console.log(new Date())
         }
+      }
     </script>
 </body>
 </html>

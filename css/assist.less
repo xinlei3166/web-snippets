@@ -1,0 +1,42 @@
+// margin and padding style generating function
+.forMP(@i, @d, @n) when (@i<=@n) {
+  @px: @i * 1px;
+  // margin
+  .m-@{i} { margin: @px }
+  .mx-@{i} { margin: 0 @px }
+  .my-@{i} { margin: @px 0 }
+  .mt-@{i} { margin-top: @px }
+  .mr-@{i} { margin-right: @px }
+  .mb-@{i} { margin-bottom: @px }
+  .ml-@{i} { margin-left: @px }
+
+  // padding
+  .p-@{i} { padding: @px }
+  .px-@{i} { padding: 0 @px }
+  .py-@{i} { padding: @px 0 }
+  .pt-@{i} { padding-top: @px }
+  .pr-@{i} { padding-right: @px }
+  .pb-@{i} { padding-bottom: @px }
+  .pl-@{i} { padding-left: @px }
+
+  // loop
+  .forMP(@i + @d, @d, @n);
+}
+
+// margin auto style generating function
+.forMAuto() {
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  .my-auto { margin-top: auto; margin-bottom: auto; }
+  .m-auto { margin: auto; }
+  .mt-auto { margin-top: auto; }
+  .mr-auto { margin-right: auto; }
+  .mb-auto { margin-bottom: auto; }
+  .ml-auto { margin-left: auto; }
+}
+
+// 0 4 8 12 16 20 24
+.forMP(0, 4, 24);
+// 10
+.forMP(10, 10, 10);
+// auto
+.forMAuto();
