@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>draw-shape</title>
+  <style>
+    .wrap {
+      width: 200px;
+      height: 200px;
+      margin: 100px auto;
+    }
+    .triangle {
+      border-style: solid;
+      border-color: transparent;
+      /* top | right | bottom | left */
+      /* 我们可以打乱border-width的top、right、bottom和left值来改变三角形的方向 */
+      border-width: 7px 0 7px 10px;
+      border-left-color: blue;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="triangle"></div>
+</div>
+</body>
+</html>

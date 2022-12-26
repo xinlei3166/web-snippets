@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>圆形</title>
+  <style>
+    .wrap {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      margin: 200px 0 0 300px;
+    }
+   .small-circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: pink;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .big-circle {
+      box-sizing: border-box;
+      width: 600px;
+      height: 600px;
+      border: solid 10px blue;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="small-circle"></div>
+  <div class="big-circle"></div>
+</div>
+<script>
+  // 设定圆心位置
+  var A = 290;
+  var B = 290;
+  // 设定半径长度
+  var R = 290;
+  // 定义X,Y,deg
+  var X, Y, angle = 0;
+
+
+  setInterval(function() {
+    angle++;
+    angle = angle % 360;
+    gotoDeg(angle);
+  }, 20)
+
+  // 根据角度变换位置
+  function gotoDeg(deg) {
+    X = A + Math.sin(degToRadianChange(deg)) * R;
+    Y = B - Math.cos(degToRadianChange(deg)) * R;
+    document.querySelectorAll('.small-circle')[0].style.left = X + 'px';
+    document.querySelectorAll('.small-circle')[0].style.top = Y + 'px';
+  }
+
+  // 角度转弧度
+  function degToRadianChange(deg) {
+    return Math.PI / 180 * deg
+  }
+</script>
+</body>
+
+</html>
