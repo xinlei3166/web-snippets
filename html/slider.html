@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Slider</title>
+  <style>
+    // CSS
+    html {
+      font-size: 50px !important;
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .slider-wrapper {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .slider-wrapper img {
+      flex-shrink: 0;
+      width: 100%;
+      height: 80vh;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-color: #ccc;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: #333;
+    }
+  </style>
+</head>
+<body>
+<div class="slider">
+  <div class="slider-wrapper">
+    <img src="./mimg/1.jpeg">
+    <img src="./mimg/2.jpeg">
+    <img src="./mimg/3.jpeg">
+    <img src="./mimg/1.jpeg" id="lastClone">
+    <img src="./mimg/2.jpeg" id="firstClone">
+  </div>
+  <div class="dots"></div>
+</div>
+
+<script>
+  // JavaScript
+  const sliderWrapper = document.querySelector('.slider-wrapper');
+  const images = document.querySelectorAll('.slider-wrapper img');
+  const dotsWrapper = document.querySelector('.dots');
+
+  let counter = 1;
+  let startX = 0;
+  let endX = 0;
+  const size = images[0].clientWidth;
+
+  sliderWrapper.style.transform = `translateX(${-size * counter}px)`;
+
+  images.forEach((image, index) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (index === counter - 1) {
+      dot.classList.add('active');
+    }
+    dotsWrapper.appendChild(dot);
+
+    dot.addEventListener('click', () => {
+      sliderWrapper.style.transition = 'transform 0.3s ease-in-out';
+      counter = index + 1;
+      sliderWrapper.style.transform = `translateX(${-size * counter}px)`;
+      setActiveDot();
+    });
+  });
+
+  function setActiveDot() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+      if (index === counter - 1) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  sliderWrapper.addEventListener('touchstart', (event) => {
+    startX = event.touches[0].clientX;
+  });
+
+  sliderWrapper.addEventListener('touchmove', (event) => {
+    event.preventDefault();
+    endX = event.touches[0].clientX;
+    const distance = endX - startX;
+    sliderWrapper.style.transition = 'none';
+    sliderWrapper.style.transform = `translateX(${-size * counter + distance}px)`;
+  });
+
+  sliderWrapper.addEventListener('touchend', () => {
+    const distance = endX - startX;
+    if (distance > size / 2 && counter > 1) {
+      counter--;
+      sliderWrapper.style.transition = 'transform 0.3s ease-in-out';
+      sliderWrapper.style.transform = `translateX(${-size * counter}px)`;
+      setActiveDot();
+    } else if (distance < -size / 2 && counter < images.length - 1) {
+      counter++;
+      sliderWrapper.style.transition = 'transform 0.3s ease-in-out';
+      sliderWrapper.style.transform = `translateX(${-size * counter}px)`;
+      setActiveDot();
+    } else {
+      sliderWrapper.style.transition = 'transform 0.3s ease-in-out';
+      sliderWrapper.style.transform = `translateX(${-size * counter}px)`;
+    }
+  });
+
+  setInterval(() => {
+    if (counter >= images.length - 1) return;
+    counter++;
+    sliderWrapper.style.transition = 'transform 0.3s ease-in-out';
+    sliderWrapper.style.transform = `translateX(${-size * counter}px)`;
+    setActiveDot();
+  }, 5000);
+
+  sliderWrapper.addEventListener('transitionend', () => {
+    if (images[counter].id === 'lastClone') {
+      sliderWrapper.style.transition = 'none';
+      counter = images.length - 2;
+      sliderWrapper.style.transform = `translateX(${-size * counter}px)`;
+    }
+
+    if (images[counter].id === 'firstClone') {
+      sliderWrapper.style.transition = 'none';
+      counter = images.length - counter;
+      sliderWrapper.style.transform = `translateX(${-size * counter}px)`;
+    }
+  });
+</script>
