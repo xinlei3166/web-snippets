@@ -1,18 +1,19 @@
 {
-  "name": "snippets",
+  "name": "web-snippets",
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "Parser.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "junxi",
-  "license": "ISC",
+  "author": "君惜",
+  "license": "MIT",
   "dependencies": {
     "@antv/g-canvas": "^0.4.12",
     "@antv/g6": "^3.1.6",
     "axios": "^0.27.2",
+    "cac": "^6.7.14",
     "dayjs": "^1.10.4",
     "element-ui": "^2.12.0",
     "js-base64": "^3.7.2",
@@ -21,10 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xinlei3166/web_utils.git"
+    "url": "git+https://github.com/xinlei3166/web-snippets.git"
   },
   "bugs": {
-    "url": "https://github.com/xinlei3166/web_utils/issues"
+    "url": "https://github.com/xinlei3166/web-snippets/issues"
   },
-  "homepage": "https://github.com/xinlei3166/web_utils#readme"
+  "homepage": "https://github.com/xinlei3166/web-snippets#readme",
+  "devDependencies": {
+    "picocolors": "^1.0.0"
+  }
 }

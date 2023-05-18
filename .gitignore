@@ -26,3 +26,6 @@ pnpm-debug.log*
 demo.js
 demo.ts
 demo.html
+scribble.js
+scribble.ts
+scribble.html
